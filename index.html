@@ -1,0 +1,453 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aria K. Vance | AI & Digital Branding Specialist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define the color palette and other root variables */
+        :root {
+            --bg-color: #0a0a14;
+            --primary-glow: #00f6ff; /* Teal */
+            --secondary-glow: #ff7f50; /* Orange */
+            --tertiary-glow: #9370db; /* Purple */
+            --text-color: #e0e0e0;
+            --panel-bg: rgba(15, 23, 42, 0.6); /* Slate-900 with opacity */
+            --panel-border: rgba(0, 246, 255, 0.2);
+            --font-family: 'Exo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        /* Animated background canvas */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* Main container for the resume layout */
+        .resume-container {
+            width: 100%;
+            max-width: 1200px; /* Optimized for 4K viewing but scales down */
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* General styling for the holographic panels */
+        .holographic-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(0, 246, 255, 0.1), 0 0 30px rgba(0, 246, 255, 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .holographic-panel:hover {
+            box-shadow: 0 0 25px rgba(0, 246, 255, 0.25), 0 0 50px rgba(0, 246, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        /* High-tech UI corner brackets for panels */
+        .holographic-panel::before, .holographic-panel::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--primary-glow);
+            border-style: solid;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        .holographic-panel::before {
+            top: -2px;
+            left: -2px;
+            border-width: 2px 0 0 2px;
+            border-top-left-radius: 1rem;
+        }
+        .holographic-panel::after {
+            bottom: -2px;
+            right: -2px;
+            border-width: 0 2px 2px 0;
+            border-bottom-right-radius: 1rem;
+        }
+        .holographic-panel:hover::before, .holographic-panel:hover::after {
+            width: 30px;
+            height: 30px;
+            opacity: 1;
+        }
+
+        /* Section header styling */
+        .section-header {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary-glow);
+            text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: flicker 3s infinite alternate;
+        }
+
+        /* Keyframe animation for text flicker */
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow:
+                0 0 4px var(--primary-glow),
+                0 0 11px var(--primary-glow),
+                0 0 19px var(--primary-glow),
+                0 0 40px var(--primary-glow),
+                0 0 80px #fff,
+                0 0 90px #fff,
+                0 0 100px #fff,
+                0 0 150px #fff;
+            }
+            20%, 24%, 55% {        
+                text-shadow: none;
+            }
+        }
+
+        /* Portrait zone styling */
+        .portrait-zone {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-glow);
+            padding: 7px;
+            position: relative;
+            box-shadow: 0 0 20px var(--primary-glow), inset 0 0 15px var(--primary-glow);
+            animation: rotate-glow 10s linear infinite;
+        }
+        .portrait-zone img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(110%) brightness(1.1);
+        }
+        /* Animated rings around portrait */
+        .portrait-zone::before, .portrait-zone::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border-style: solid;
+        }
+        .portrait-zone::before {
+            width: calc(100% + 14px);
+            height: calc(100% + 14px);
+            border-width: 2px;
+            border-color: var(--secondary-glow);
+            animation: rotate-glow 8s linear infinite reverse;
+            opacity: 0.7;
+        }
+        .portrait-zone::after {
+            width: calc(100% + 24px);
+            height: calc(100% + 24px);
+            border-width: 1px;
+            border-color: var(--tertiary-glow);
+            animation: rotate-glow 12s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes rotate-glow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Job title and company styling */
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .company-name {
+            color: var(--secondary-glow);
+            text-shadow: 0 0 5px var(--secondary-glow);
+        }
+        .job-date {
+            color: var(--tertiary-glow);
+            font-size: 0.9rem;
+        }
+        
+        /* Skills section styling */
+        .skill-category {
+            margin-bottom: 1.5rem;
+        }
+        .skill-category-title {
+            font-weight: 600;
+            color: var(--primary-glow);
+            margin-bottom: 0.75rem;
+        }
+        .skill-bar-container {
+            width: 100%;
+            height: 10px;
+            background-color: rgba(0, 246, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 246, 255, 0.2);
+        }
+        .skill-bar {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--tertiary-glow), var(--primary-glow));
+            box-shadow: 0 0 8px var(--primary-glow);
+            animation: skill-load 2s ease-out forwards;
+        }
+        
+        @keyframes skill-load {
+            from { width: 0; }
+        }
+        
+        /* Education section styling */
+        .degree {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .institution {
+            color: var(--secondary-glow);
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <!-- Animated background canvas -->
+    <canvas id="matrix-bg"></canvas>
+
+    <div class="resume-container">
+        <!-- Header Section -->
+        <header class="holographic-panel flex flex-col md:flex-row items-center justify-between text-center md:text-left p-6 md:p-8">
+            <div class="md:w-3/4 mb-6 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-white tracking-wider">Aria K. Vance</h1>
+                <p class="text-xl md:text-2xl mt-2" style="color: var(--primary-glow); text-shadow: 0 0 5px var(--primary-glow);">
+                    AI & Digital Branding Architect
+                </p>
+                <p class="mt-4 text-gray-300 max-w-2xl">
+                    A creative technologist weaving narrative, data, and generative AI to build immersive brand identities for the digital frontier. Inspired by the synthesis of human creativity and machine intelligence.
+                </p>
+            </div>
+            <div class="portrait-zone flex-shrink-0">
+                <img src="https://placehold.co/200x200/0a0a14/e0e0e0?text=AV" alt="Aria Vance Portrait"
+                onerror="this.onerror=null;this.src='https://placehold.co/200x200/0a0a14/e0e0e0?text=AV';">
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Profile & Education -->
+            <div class="lg:col-span-1 flex flex-col">
+                <!-- Profile Panel -->
+                <section class="holographic-panel flex-grow">
+                    <h2 class="section-header">Profile</h2>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start"><span class="mr-3 text-teal-400">▶</span> <strong>Location:</strong> Neo-Kyoto, Sector 7G</li>
+                        <li class="flex items-start"><span class="mr-3 text-teal-400">▶</span> <strong>Clearance:</strong> Top Secret / SCI</li>
+                        <li class="flex items-start"><span class="mr-3 text-teal-400">▶</span> <strong>Web:</strong> <a href="#" class="text-orange-400 hover:text-orange-300">ariavance.ai</a></li>
+                        <li class="flex items-start"><span class="mr-3 text-teal-400">▶</span> <strong>Matrix ID:</strong> <a href="#" class="text-orange-400 hover:text-orange-300">0x4A...B2</a></li>
+                    </ul>
+                </section>
+                
+                <!-- Education Panel -->
+                <section class="holographic-panel flex-grow mt-8">
+                    <h2 class="section-header">Education</h2>
+                    <div class="mb-6">
+                        <p class="degree">M.S. in Synthetic Media & Machine Consciousness</p>
+                        <p class="institution">Cybernetics Institute of Technology</p>
+                        <p class="job-date">Graduated: 2045</p>
+                    </div>
+                    <div>
+                        <p class="degree">B.F.A. in Digital Art & Narrative Design</p>
+                        <p class="institution">New Media University of California</p>
+                        <p class="job-date">Graduated: 2042</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Experience & Skills -->
+            <div class="lg:col-span-2">
+                <!-- Experience Panel -->
+                <section class="holographic-panel">
+                    <h2 class="section-header">Experience</h2>
+                    <div class="relative pl-8 py-4 border-l-2 border-purple-500/30">
+                        <!-- Timeline Dot -->
+                        <div class="absolute w-4 h-4 bg-secondary-glow rounded-full -left-2 top-5 border-4 border-bg-color shadow-[0_0_10px_var(--secondary-glow)]"></div>
+                        <p class="job-title">Lead AI Brand Strategist</p>
+                        <p class="company-name">OmniCorp Dynamics</p>
+                        <p class="job-date">2047 - Present</p>
+                        <ul class="mt-2 list-disc list-inside text-gray-300 space-y-2">
+                            <li>Directed the development of "Project Chimera," a generative AI platform for creating dynamic, personalized brand narratives.</li>
+                            <li>Pioneered the use of neuro-aesthetic feedback loops to optimize digital campaigns, increasing engagement by 300%.</li>
+                            <li>Managed a cross-functional team of data ghosts, synth-artists, and narrative engineers.</li>
+                        </ul>
+                    </div>
+                    <div class="relative pl-8 py-4 mt-6 border-l-2 border-purple-500/30">
+                         <!-- Timeline Dot -->
+                        <div class="absolute w-4 h-4 bg-secondary-glow rounded-full -left-2 top-5 border-4 border-bg-color shadow-[0_0_10px_var(--secondary-glow)]"></div>
+                        <p class="job-title">Senior Digital Prophet</p>
+                        <p class="company-name">Ghost in the Machine Creative</p>
+                        <p class="job-date">2045 - 2047</p>
+                        <ul class="mt-2 list-disc list-inside text-gray-300 space-y-2">
+                            <li>Analyzed zetabytes of cultural data to forecast digital trends and inform creative strategy for holo-ad campaigns.</li>
+                            <li>Designed and launched the award-winning "VantaBlack" campaign for a luxury cybernetics client.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Skills Panel -->
+                <section class="holographic-panel mt-8">
+                    <h2 class="section-header">Skills</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div class="skill-category">
+                            <p class="skill-category-title">Generative AI & Machine Learning</p>
+                            <div class="space-y-3">
+                                <div>
+                                    <p>LLM Fine-Tuning & Prompt Engineering</p>
+                                    <div class="skill-bar-container"><div class="skill-bar" style="width: 95%;"></div></div>
+                                </div>
+                                <div>
+                                    <p>Diffusion Models (Imagen, Midjourney)</p>
+                                    <div class="skill-bar-container"><div class="skill-bar" style="width: 90%;"></div></div>
+                                </div>
+                                <div>
+                                    <p>Generative Adversarial Networks (GANs)</p>
+                                    <div class="skill-bar-container"><div class="skill-bar" style="width: 85%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <p class="skill-category-title">Digital Branding & Design</p>
+                            <div class="space-y-3">
+                                <div>
+                                    <p>Holographic UI/UX Design</p>
+                                    <div class="skill-bar-container"><div class="skill-bar" style="width: 98%;"></div></div>
+                                </div>
+                                <div>
+                                    <p>Immersive Storytelling</p>
+                                    <div class="skill-bar-container"><div class="skill-bar" style="width: 92%;"></div></div>
+                                </div>
+                                <div>
+                                    <p>Quantum Analytics & Trend Forecasting</p>
+                                    <div class="skill-bar-container"><div class="skill-bar" style="width: 88%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // JavaScript for the animated background
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        // Particle class for the flowing circuits effect
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.speed = 1 + Math.random() * 1.5;
+                this.angle = Math.random() * 360;
+                this.size = 1 + Math.random() * 2;
+                this.color = `rgba(${Math.random() > 0.5 ? '0, 246, 255' : '255, 127, 80'}, ${Math.random() * 0.5 + 0.3})`;
+            }
+
+            update() {
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+
+                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() > 0.5 ? 0 : height;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        let particles = [];
+        const particleCount = Math.floor(width / 15);
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connecting lines (fiber optics)
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(147, 112, 219, ${1 - distance / 100})`; // Purple lines
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            init();
+        });
+
+        // Start the animation
+        init();
+        animate();
+    </script>
+</body>
+</html>
+
