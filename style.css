@@ -1,9 +1,11 @@
 .degree {
-  color: var(--secondary-glow); /* orange pour les titres d’écoles */
-  font-weight: 600;
+  color: var(--secondary-glow);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--secondary-glow);
 }
 
 .institution {
-  color: var(--text-color); /* blanc pour la description */
+  color: var(--text-color);
   font-weight: 400;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
 }
